@@ -1,0 +1,15 @@
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\obj\Debug\net6.0\MapApplication.csproj.AssemblyReference.cache
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\obj\Debug\net6.0\MapApplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\obj\Debug\net6.0\MapApplication.AssemblyInfoInputs.cache
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\obj\Debug\net6.0\MapApplication.AssemblyInfo.cs
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\obj\Debug\net6.0\MapApplication.csproj.CoreCompileInputs.cache
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\bin\Debug\net6.0\MapApplication.exe
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\bin\Debug\net6.0\MapApplication.deps.json
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\bin\Debug\net6.0\MapApplication.runtimeconfig.json
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\bin\Debug\net6.0\MapApplication.dll
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\bin\Debug\net6.0\MapApplication.pdb
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\obj\Debug\net6.0\MapApplication.dll
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\obj\Debug\net6.0\refint\MapApplication.dll
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\obj\Debug\net6.0\MapApplication.pdb
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\obj\Debug\net6.0\MapApplication.genruntimeconfig.cache
+C:\Users\AGULSER\source\repos\MapApplication\MapApplication\obj\Debug\net6.0\ref\MapApplication.dll

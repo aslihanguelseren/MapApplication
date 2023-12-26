@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MapApplication"
   ],
-  "SelectedNode": "\\C:\\Users\\AGULSER\\Source\\Repos\\MapApplication",
+  "SelectedNode": "\\MapApplication\\MapApplication.csproj",
   "PreviewInSolutionExplorer": false
 }

@@ -1,5 +1,98 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+
+class Map
+{
+    public int width { get; set; }
+    public int height { get; set; }
+
+    public Map(int width, int height)
+    {
+        this.width = width;
+        this.height = height;
+    }
+
+}
+abstract class LifeForm
+{
+    protected Map map;
+    protected List<int[]> coordinates = new List<int[]>();
+
+    protected LifeForm(Map map)
+    {
+        this.map = map;
+    }
+
+    public void Move(int dx, int dy)
+    {
+        int x = 0;
+        int y = 0;
+        if (coordinates.Count != 0) { 
+        x = GetActualCoordinate()[0];
+        y = GetActualCoordinate()[1];
+    }
+        x = (x + dx);
+        y = (y + dy);
+
+        if (x > map.width) x = 0;
+        else if (x < 0) x = map.width;
+
+        if (y > map.height) y = 0;
+        else if (y < 0) y = map.height;
+        coordinates.Add(new int[] { x, y });
+    }
+
+    public abstract List<int[]> ReportPath();
+
+    public abstract int[] ReportActualCoordinate();
+    public int[] GetActualCoordinate()
+    {
+        return coordinates[coordinates.Count - 1];
+    }
+}
+class Human : LifeForm
+{
+    public Human(Map map) : base(map) { }
+
+    public override List<int[]> ReportPath()
+    {
+        Console.WriteLine("Report Path");
+        foreach (var coord in coordinates)
+        {
+            Console.WriteLine("[" + coord[0] + ", " + coord[1] + "]");
+        }
+        return coordinates; //new List<int[]>(coordinates)
+    }
+    public override int[] ReportActualCoordinate()
+      {
+        Console.WriteLine("Report Actual Coordinate");
+        Console.WriteLine("[" + coordinates[coordinates.Count - 1][0] + ", " + coordinates[coordinates.Count - 1][1] + "]");
+        return coordinates[coordinates.Count - 1];
+    }
+}
+
+class Alien : LifeForm
+{
+    public Alien(Map map) : base(map) { }
+
+    public override List<int[]> ReportPath()
+    {
+        List<int[]> reversed = coordinates.ConvertAll(coordinates => new int[2] { coordinates[1], coordinates[0] });
+        Console.WriteLine("Report Path");
+        foreach (var coord in reversed)
+        {
+            Console.WriteLine("[" + coord[0] + ", " + coord[1] + "]");
+        }
+        return reversed;
+    }
+    public override int[] ReportActualCoordinate()
+    {
+        Console.WriteLine("Report Actual Coordinate");
+        Console.WriteLine("[" + coordinates[coordinates.Count - 1][1] + ", " + coordinates[coordinates.Count - 1][0] + "]");
+        return coordinates[coordinates.Count - 1];
+    }
+}
 
 class Program
 {
@@ -14,65 +107,35 @@ class Program
             Console.WriteLine("Invalid map dimensions");
             return;
         }
-
+        var map = new Map(width, height);
         Console.WriteLine("Movement coordinates:");
         string[] movements = Console.ReadLine().Split(',');
         List<int[]> coordinates = new List<int[]>();
         Console.WriteLine("Life form (1 for Human, 2 for Alien):");
         int lifeFormType = int.Parse(Console.ReadLine());
-
-        int x = 0, y = 0;
-        for (int i = 0; i < movements.Length; i += 2)
-        {
-            int dx = int.Parse(movements[i]);
-            int dy = int.Parse(movements[i + 1]);
-
-            x = (x + dx);
-            y = (y + dy);
-
-            if (x > width) x = 0;
-            else if (x < 0) x = width;
-
-            if (y > height) y = 0;
-            else if (y < 0) y = height;
-            coordinates.Add(new int[] { x, y });
-        }
+        LifeForm lifeForm;
 
         switch (lifeFormType)
         {
             case 1:
-                ReportPath(coordinates);
-                ReportActualCoordinate(coordinates[coordinates.Count - 1]);
+                lifeForm = new Human(map);
                 break;
             case 2:
-                List<int[]> alienCoordinates = new List<int[]>();
-                foreach (var coord in coordinates)
-                {
-                    alienCoordinates.Add(new int[] { coord[1], coord[0] });
-                }
-
-                ReportPath(alienCoordinates);
-                ReportActualCoordinate(alienCoordinates[alienCoordinates.Count - 1]);
+                lifeForm = new Alien(map);
                 break;
-            default: 
+            default:
+                lifeForm = new Human(map);
                 Console.WriteLine("Invalid life form");
                 break;
         }
-        Console.ReadLine();
-    }
-
-    static void ReportPath(List<int[]> coordinates)
-    {
-        Console.WriteLine("Report Path");
-        foreach (var coord in coordinates)
+        for (int i = 0; i < movements.Length; i += 2)
         {
-            Console.WriteLine("[" + coord[0] + ", "+coord[1] + "]");
+            int dx = int.Parse(movements[i]);
+            int dy = int.Parse(movements[i + 1]);
+            lifeForm.Move(dx, dy);
         }
-    }
-
-    static void ReportActualCoordinate(int[] coordinate)
-    {
-        Console.WriteLine("Report Actual Coordinate");
-        Console.WriteLine("[" + coordinate[0] + ", " + coordinate[1] + "]");
+        lifeForm.ReportPath();
+        lifeForm.ReportActualCoordinate();
+        Console.ReadLine();
     }
 }
